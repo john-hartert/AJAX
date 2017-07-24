@@ -17,26 +17,15 @@ function postData(x){
 
 function append(x){
     var disOne = $("<p></p>").text(x)
-    $("header").append(disOne);
+    $("header").append(disOne);//This works, but I need a checkbox to show up.
 }
 
-// function deleteOrder(id){
-//     return $.ajax( {
-//         url: URL + '/' + id,
-//         method: 'DELETE'
-//     });
-// }
-
-$(FORM_SEL).on("submit", function(event){ 
-    event.preventDefault();
-    // console.log("hello");
-    var dataToSendToServer = {
-        "coffee": $("#coffeeOrder").val(), //Gets the value out.
-        "emailAddress": $("#emailInput").val() //Gets the value out.
-    };
-    postData(dataToSendToServer);
-    append($("#coffeeOrder").val());
-});
+function deleteOrder(id){ //This will delete the entry based on the email, not on the
+    return $.ajax( {      //order id.
+        url: URL + '/' + id,
+        method: 'DELETE'
+    });
+}
 
 //FORM-SEL is a variable that refers to the entire form on the HTML
 //due to '[data-coffee-order]'.
@@ -47,38 +36,35 @@ $(FORM_SEL).on("submit", function(event){
 //jQueary to look at the information inserted into the id coffeeOrder and emailInput.
 //.val() pulls the value out and calls postData(dataToSendToServer), which posts the
 //information to the server.
-
 //Use network/headers/form data to see if everything worked.
+$(FORM_SEL).on("submit", function(event){ 
+    event.preventDefault();
+    var dataToSendToServer = {
+        "coffee": $("#coffeeOrder").val(), //Gets the value out.
+        "emailAddress": $("#emailInput").val() //Gets the value out.
+    };
+    postData(dataToSendToServer);
+    append($("#coffeeOrder").val());//Need to append a checkbox, but this works.
+});
+//--------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-//-------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 // 1. From your helper functions, return the result of calling these Ajax methods. 
 // You can use this to chain other function calls.
-//--------------------------------------------------------------------------------
+//===================================================================================
+//===================================================================================
+//===================================================================================
 // 2. Create a helper function that draws an individual coffee order to the DOM, 
 // with a checkbox.
 // Call this helper function using the data sent back after POSTing a new coffee order.
-//-------------------------------------------------------------------------------------
-
-
-//Once submit is clicked enable the table with the checkbox and fill the table
-//with the information submitted in Coffee order.
-
-
-
-
-
-
-
+//===================================================================================
+//===================================================================================
+//===================================================================================
 // 3. Write a function "deleteOrder" that makes an additional $.ajax call to send a 
 // DELETE request, given a particular order ID.
-//---------------------------------------------------------------------------------
+//===================================================================================
+//===================================================================================
+//===================================================================================
 // 4. Create a helper function that adds a listener to the container that holds all 
 // your coffee order listing.
 //----------------------------------------------------------------------------------
