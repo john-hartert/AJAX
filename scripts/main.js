@@ -1,8 +1,9 @@
 var URL = "http://dc-coffeerun.herokuapp.com/api/coffeeorders";
-var stuff = {
-    "coffee": "good kind",
-    "emailAddress": "guy@guy.com"
-};
+var FORM_SEL = '[data-coffee-order]'
+
+
+
+
 
 function getData(){
     $.get(URL, function (data) {
@@ -11,37 +12,84 @@ function getData(){
     })
 }
 
-function postData(){
-    $.post(URL, stuff, function (datas){
+function postData(x){
+    $.post(URL, x, function (datas){
         console.log(datas);
         return datas;
     })
 }
 
-// function main(){
-//     var function1 = getData();
-//     var function2 = postData();
-// }
+function deleteOrder(id){
+    return $.ajax( {
+        url: URL + '/' + id,
+        method: 'DELETE'
+    });
+}
 
-// main();
+
+$(FORM_SEL).on("submit", function(event){ 
+    event.preventDefault();
+    // console.log("hello");
+    var dataToSendToServer = {
+        "coffee": $("#coffeeOrder").val(), //Gets the value out.
+        "emailAddress": $("#emailInput").val() //Gets the value out.
+    
+    };
+    postData(dataToSendToServer);
+});
+
+//FORM-SEL is a variable that refers to the entire form on the HTML
+//due to '[data-coffee-order]'.
+//$(FORM_SEL) uses jQuery to look through the entire form. .on listens to the event,
+//in this case it listens to "submit". The anonmous function takes the argument event,
+//and uses preventDefault() to keep it from relocating to another page. Default action
+//is to submit. The next variable takes the keys 'coffee' and 'emailAddress' and uses
+//jQueary to look at the information inserted into the id coffeeOrder and emailInput.
+//.val() pulls the value out and calls postData(dataToSendToServer), which posts the
+//information to the server.
+
+//Use network/headers/form data to see if everything worked.
+
+
+
+
+
+
+
 
 //-------------------------------------------------------------------------------
 // 1. From your helper functions, return the result of calling these Ajax methods. 
 // You can use this to chain other function calls.
 //--------------------------------------------------------------------------------
-
 // 2. Create a helper function that draws an individual coffee order to the DOM, 
 // with a checkbox.
 // Call this helper function using the data sent back after POSTing a new coffee order.
+//-------------------------------------------------------------------------------------
 
-// Write a function "deleteOrder" that makes an additional $.ajax call to send a 
+//When submit is clicked have the information in Email and Coffee Order post to the
+//server.
+//Once submit is clicked enable the table with the checkbox and fill the table
+//with the information submitted in Coffee order.
+
+
+
+
+
+
+
+// 3. Write a function "deleteOrder" that makes an additional $.ajax call to send a 
 // DELETE request, given a particular order ID.
-// Create a helper function that adds a listener to the container that holds all 
+//---------------------------------------------------------------------------------
+// 4. Create a helper function that adds a listener to the container that holds all 
 // your coffee order listing.
-// When a checkbox is clicked, call "deleteOrder" for that order.
-// Write a helper function, "removeOrderListing" that removes the individual 
+//----------------------------------------------------------------------------------
+// 5. When a checkbox is clicked, call "deleteOrder" for that order.
+//----------------------------------------------------------------------------------
+// 6. Write a helper function, "removeOrderListing" that removes the individual 
 // order listing from the DOM
-// When the Response comes back from the server after sending a DELETE Request, 
+//-----------------------------------------------------------------------------------
+// 7. When the Response comes back from the server after sending a DELETE Request, 
 // call "removeOrderListing" for that order.
-// To coordinate all of this activity, you will want to make good use of Promises, 
+//-----------------------------------------------------------------------------------
+// 8. To coordinate all of this activity, you will want to make good use of Promises, 
 // chaining together your sequence of function calls using the .then() method.
