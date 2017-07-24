@@ -18,6 +18,12 @@ function postData(){
     })
 }
 
+// function main(){
+//     var function1 = getData();
+//     var function2 = postData();
+// }
+
+// main();
 
 //-------------------------------------------------------------------------------
 // 1. From your helper functions, return the result of calling these Ajax methods. 
@@ -26,8 +32,8 @@ function postData(){
 
 // 2. Create a helper function that draws an individual coffee order to the DOM, 
 // with a checkbox.
-
 // Call this helper function using the data sent back after POSTing a new coffee order.
+
 // Write a function "deleteOrder" that makes an additional $.ajax call to send a 
 // DELETE request, given a particular order ID.
 // Create a helper function that adds a listener to the container that holds all 
