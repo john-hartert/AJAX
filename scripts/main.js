@@ -1,10 +1,6 @@
 var URL = "http://dc-coffeerun.herokuapp.com/api/coffeeorders";
 var FORM_SEL = '[data-coffee-order]'
 
-
-
-
-
 function getData(){
     $.get(URL, function (data) {
         console.log(data);
@@ -19,13 +15,17 @@ function postData(x){
     })
 }
 
-function deleteOrder(id){
-    return $.ajax( {
-        url: URL + '/' + id,
-        method: 'DELETE'
-    });
+function append(x){
+    var disOne = $("<p></p>").text(x)
+    $("header").append(disOne);
 }
 
+// function deleteOrder(id){
+//     return $.ajax( {
+//         url: URL + '/' + id,
+//         method: 'DELETE'
+//     });
+// }
 
 $(FORM_SEL).on("submit", function(event){ 
     event.preventDefault();
@@ -33,9 +33,9 @@ $(FORM_SEL).on("submit", function(event){
     var dataToSendToServer = {
         "coffee": $("#coffeeOrder").val(), //Gets the value out.
         "emailAddress": $("#emailInput").val() //Gets the value out.
-    
     };
     postData(dataToSendToServer);
+    append($("#coffeeOrder").val());
 });
 
 //FORM-SEL is a variable that refers to the entire form on the HTML
@@ -66,8 +66,7 @@ $(FORM_SEL).on("submit", function(event){
 // Call this helper function using the data sent back after POSTing a new coffee order.
 //-------------------------------------------------------------------------------------
 
-//When submit is clicked have the information in Email and Coffee Order post to the
-//server.
+
 //Once submit is clicked enable the table with the checkbox and fill the table
 //with the information submitted in Coffee order.
 
